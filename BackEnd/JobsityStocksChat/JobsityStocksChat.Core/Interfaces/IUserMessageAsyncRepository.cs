@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace JobsityStocksChat.Core.Interfaces
 {
-    public interface IStockSharePriceServiceProvider
+    public interface IUserMessageAsyncRepository
     {
-        StockShareInfo GetStockSharePrice(string stockCode);
+        Task<IReadOnlyList<UserMessage>> GetLast50MessagesAsync();
     }
 }

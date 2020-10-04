@@ -39,12 +39,12 @@ import { ChatMessageSenderComponent } from './chat-message-sender/chat-message-s
     ReactiveFormsModule,
     FontAwesomeModule
   ],
-  //providers : [{
-  //   provide: HTTP_INTERCEPTORS,
-  //   useClass: AuthInterceptor,
-  //   multi: true
-  // }],
-  providers: [AuthGuardService],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }, AuthGuardService],
+  // providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

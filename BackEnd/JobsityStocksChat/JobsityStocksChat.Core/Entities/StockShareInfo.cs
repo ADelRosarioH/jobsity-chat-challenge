@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JobsityStocksChat.Core.Entities
 {
-    public class StockSharePrice
+    public class StockShareInfo
     {
         public string Symbol { get; set; }
         public DateTime Date { get; set; }

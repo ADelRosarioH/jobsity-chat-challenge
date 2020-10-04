@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JobsityStocksChat.Core.Entities;
 using JobsityStocksChat.Core.Interfaces;
 using JobsityStocksChat.Infrastructure.Identity;
 using JobsityStocksChat.Infrastructure.Persistence;
@@ -45,6 +46,7 @@ namespace JobsityStocksChat.WebAPI
             services.AddAuthentication(config =>
             {
                 config.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(config =>
             {
@@ -66,7 +68,7 @@ namespace JobsityStocksChat.WebAPI
                 {
                     OnMessageReceived = context =>
                     {
-                        var accessToken = context.Request.Query["token"];
+                        var accessToken = context.Request.Query["access_token"];
 
                         // If the request is for our hub...
                         var path = context.HttpContext.Request.Path;
@@ -82,12 +84,18 @@ namespace JobsityStocksChat.WebAPI
                 };
             });
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddCors();
 
             services.AddSignalR();
 
             services.AddScoped<ITokenClaimService, IdentityTokenClaimService>();
+            services.AddScoped<IAsyncRepository<UserMessage>, UserMessageAsyncRepository>();
+            services.AddScoped<IUserMessageAsyncRepository, UserMessageAsyncRepository>();
+            services.AddScoped<IChatMessageService, ChatMessageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

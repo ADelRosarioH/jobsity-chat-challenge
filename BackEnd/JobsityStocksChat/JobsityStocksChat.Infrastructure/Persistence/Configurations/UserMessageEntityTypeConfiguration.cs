@@ -14,6 +14,13 @@ namespace JobsityStocksChat.Infrastructure.Persistence.Configurations
             builder.ToTable("Messages");
 
             builder.HasKey(t => t.Id);
+
+            builder.Property(t => t.Id)
+                .HasDefaultValueSql("newid()");
+
+            builder.HasOne(t => t.User)
+                .WithMany(t => t.Messages)
+                .HasForeignKey(t => t.UserId);
         }
     }
 }

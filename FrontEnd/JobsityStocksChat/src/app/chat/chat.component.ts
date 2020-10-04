@@ -22,13 +22,14 @@ export class ChatComponent implements OnInit {
 
   messages: ChatMessage[];
 
-  constructor(private authService: AuthService, private chatService: ChatService, private router: Router) {
+  constructor(private authService: AuthService,
+    private chatService: ChatService,
+    private router: Router) {
     this.messages = [];
   }
 
   ngOnInit(): void {
     this.messages = [];
-
     this.currentUser = this.authService.getCurrentUser();
 
     this.chatService.startConnection().then(() => {
@@ -38,6 +39,8 @@ export class ChatComponent implements OnInit {
     });
 
     this.chatService.setupRecieveMessageHook((data) => this.recievedMessage(data));
+
+    this.getLast50Messages();
   }
 
   sendMessage() {
@@ -48,7 +51,6 @@ export class ChatComponent implements OnInit {
     this.chatService.sendMessage({
       message,
       userName: this.currentUser.userName,
-      date: new Date().toString()
     });
 
     this.messageForm.setValue({ message: '' });
@@ -56,6 +58,12 @@ export class ChatComponent implements OnInit {
 
   recievedMessage(message: ChatMessage) {
     this.messages.push(message);
+  }
+
+  getLast50Messages() {
+    this.chatService.getLast50Messages().subscribe(messages => {
+      this.messages = messages;
+    });
   }
 
   doLogout() {

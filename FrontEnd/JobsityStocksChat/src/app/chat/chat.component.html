@@ -15,7 +15,7 @@
                         </div>
                         <!-- Chat Box-->
                         <div class="col px-0">
-                            <div class="px-4 py-5 chat-box bg-white">
+                            <div id="messages-container" class="px-4 py-5 chat-box bg-white">
                                 <div *ngFor="let message of messages">
                                     <app-chat-message-sender *ngIf="message.userName != currentUser.userName"
                                         [message]="message"></app-chat-message-sender>

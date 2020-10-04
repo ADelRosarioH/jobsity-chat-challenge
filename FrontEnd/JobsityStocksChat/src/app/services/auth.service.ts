@@ -39,6 +39,10 @@ export class AuthService {
     localStorage.removeItem('token')
   }
 
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
   getCurrentUser(): User {
     const token = localStorage.getItem('token');
     const decoded = this.jwtHelper.decodeToken(token);
