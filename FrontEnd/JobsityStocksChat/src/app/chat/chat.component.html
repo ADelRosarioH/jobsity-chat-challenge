@@ -1,0 +1,47 @@
+<div class="bg-gradient-primary" style="height: 100%;">
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="card-header">
+                            <h1>Jobsity Stocks Chat!</h1>
+                            <p>
+                                <button type="button" class="btn" (click)="doLogout()">
+                                    Logout
+                                </button>
+                            </p>
+                        </div>
+                        <!-- Chat Box-->
+                        <div class="col px-0">
+                            <div class="px-4 py-5 chat-box bg-white">
+                                <div *ngFor="let message of messages">
+                                    <app-chat-message-sender *ngIf="message.userName != currentUser.userName"
+                                        [message]="message"></app-chat-message-sender>
+
+                                    <app-chat-message-reciever *ngIf="message.userName == currentUser.userName"
+                                        [message]="message"></app-chat-message-reciever>
+                                </div>
+                            </div>
+
+                            <!-- Typing area -->
+                            <form action="#" class="bg-light" [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Type a message" aria-describedby="button-addon2"
+                                        class="form-control rounded-0 border-0 py-4 bg-light" formControlName="message"
+                                        (keydown.enter)="sendMessage()">
+                                    <div class="input-group-append">
+                                        <button id="button-addon2" type="submit" class="btn btn-link">
+                                            Send Message
+                                            <fa-icon [icon]="faPaperPlane"></fa-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

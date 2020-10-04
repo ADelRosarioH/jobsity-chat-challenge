@@ -1,4 +1,5 @@
-﻿using JobsityStocksChat.Infrastructure.Identity;
+﻿using JobsityStocksChat.Core.Entities;
+using JobsityStocksChat.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,5 +26,7 @@ namespace JobsityStocksChat.Infrastructure.Persistence
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
+
+        public DbSet<UserMessage> Messages { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using JobsityStocksChat.Core.Interfaces;
 using JobsityStocksChat.Infrastructure.Identity;
 using JobsityStocksChat.Infrastructure.Persistence;
 using JobsityStocksChat.Infrastructure.Services;
+using JobsityStocksChat.WebAPI.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -56,10 +57,35 @@ namespace JobsityStocksChat.WebAPI
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+
+                // Sending the access token in the query string is required due to
+                // a limitation in Browser APIs. We restrict it to only calls to the
+                // SignalR hub in this code.
+               
+                config.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["token"];
+
+                        // If the request is for our hub...
+                        var path = context.HttpContext.Request.Path;
+
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            (path.StartsWithSegments("/hubs/chat")))
+                        {
+                            // Read the token out of the query string
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
             });
 
             services.AddControllers();
             services.AddCors();
+
+            services.AddSignalR();
 
             services.AddScoped<ITokenClaimService, IdentityTokenClaimService>();
         }
@@ -67,7 +93,10 @@ namespace JobsityStocksChat.WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(options => options.WithOrigins("http://localhost:4200")
+           .AllowAnyMethod()
+           .AllowAnyHeader()
+           .AllowCredentials());
 
             if (env.IsDevelopment())
             {
@@ -81,6 +110,7 @@ namespace JobsityStocksChat.WebAPI
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/hubs/chat");
                 endpoints.MapControllers();
             });
         }

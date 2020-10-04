@@ -36,7 +36,7 @@ namespace JobsityStocksChat.WebAPI.Controllers
         }
 
         [HttpPost]
-        [Route("signup")]
+        [Route("register")]
         public async Task<IActionResult> Register([FromBody] NewUserViewModel model)
         {
             if (!ModelState.IsValid)
