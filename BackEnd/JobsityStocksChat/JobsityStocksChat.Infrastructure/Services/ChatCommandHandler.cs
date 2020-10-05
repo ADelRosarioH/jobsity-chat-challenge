@@ -14,18 +14,25 @@ namespace JobsityStocksChat.Infrastructure.Services
 
             string[] parts = commandWithArguments.Split("=");
 
-            if (parts.Length < 2) throw new ArgumentException("Command with no arguments.");
+            string command = string.Empty;
+            string args = string.Empty;
 
-            string command = parts[0];
-
-            string args = parts[1];
+            if (parts.Length < 2)
+            {
+                command = parts[0];
+            }
+            else
+            {
+                command = parts[0];
+                args = parts[1];
+            }
 
             action(command, args);
         }
 
         public bool IsCommand(string text)
         {
-            if (text.StartsWith("/")) return true;
+            if (text.StartsWith("/") && text.Length > 1) return true;
 
             return false;
         }
