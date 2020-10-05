@@ -1,24 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JobsityStocksChat.Core.Entities;
 using JobsityStocksChat.Core.Interfaces;
-using JobsityStocksChat.Infrastructure.Identity;
 using JobsityStocksChat.Infrastructure.Persistence;
 using JobsityStocksChat.Infrastructure.Services;
 using JobsityStocksChat.WebAPI.Hubs;
+using JobsityStocksChat.WebAPI.MQ;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace JobsityStocksChat.WebAPI
@@ -96,10 +91,14 @@ namespace JobsityStocksChat.WebAPI
             services.AddScoped<IAsyncRepository<UserMessage>, UserMessageAsyncRepository>();
             services.AddScoped<IUserMessageAsyncRepository, UserMessageAsyncRepository>();
             services.AddScoped<IChatMessageService, ChatMessageService>();
+            services.AddScoped<IChatCommandHandler, ChatCommandHandler>();
+
+            services.AddSingleton<IStockPriceQueueProducer, StockPriceQueueProducer>();
+            services.AddHostedService<StockPriceQueueConsumer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
         {
             app.UseCors(options => options.WithOrigins("http://localhost:4200")
            .AllowAnyMethod()

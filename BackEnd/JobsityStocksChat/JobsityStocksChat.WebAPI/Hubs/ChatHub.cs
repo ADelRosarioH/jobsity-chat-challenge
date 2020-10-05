@@ -14,29 +14,52 @@ namespace JobsityStocksChat.WebAPI.Hubs
     {
         private readonly IAsyncRepository<UserMessage> _userMessageRepository;
         private readonly UserManager<ApplicationUser> _userManager;
-        public ChatHub(IAsyncRepository<UserMessage> userMessageRepository, UserManager<ApplicationUser> userManager)
+        private readonly IChatCommandHandler _chatCommandHandler;
+        private readonly IStockPriceQueueProducer _stockPriceQueueProducer;
+        public ChatHub(IAsyncRepository<UserMessage> userMessageRepository,
+            UserManager<ApplicationUser> userManager,
+            IChatCommandHandler chatCommandHandler,
+            IStockPriceQueueProducer stockPriceQueueProducer)
         {
             _userMessageRepository = userMessageRepository;
             _userManager = userManager;
+            _chatCommandHandler = chatCommandHandler;
+            _stockPriceQueueProducer = stockPriceQueueProducer;
         }
 
         public async Task SendMessage(ChatMessageViewModel message)
         {
-            string userName = Context.User.Identity.Name;
-            var user = await _userManager.FindByNameAsync(userName);
+            message.CreatedAt = DateTime.Now;
 
-            var createdAt = DateTime.Now;
+            if (!_chatCommandHandler.IsCommand(message.Message))
+            {
+                await SaveMessageToDatabase(message);
+            }
+            else
+            {
+                _chatCommandHandler.Execute(message.Message, (command, args) =>
+                {
+                    if (command == "stock")
+                    {
+                        // send message to queue
+                        _stockPriceQueueProducer.RequestStockPrice(args);
+                    }
+                });
+            }
+
+            await Clients.All.SendAsync("RecieveMessage", message);
+        }
+
+        private async Task SaveMessageToDatabase(ChatMessageViewModel message)
+        {
+            var user = await _userManager.FindByNameAsync(Context.User.Identity.Name);
 
             await _userMessageRepository.AddAsync(new UserMessage
             {
                 Message = message.Message,
                 UserId = user.Id,
-                CreatedAt = createdAt
+                CreatedAt = message.CreatedAt
             });
-
-            message.CreatedAt = createdAt;
-
-            await Clients.All.SendAsync("RecieveMessage", message);
         }
     }
 }
