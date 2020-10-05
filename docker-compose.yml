@@ -1,0 +1,51 @@
+version: "3"
+services: 
+    proxy:
+        build:
+            context: ./Proxy
+            dockerfile: Dockerfile
+        ports:
+            - 8081:8081
+        depends_on:
+            - webapp
+            - webapi
+    webapp:
+        build:
+            context: ./FrontEnd/JobsityStocksChat
+            dockerfile: Dockerfile
+        ports: 
+            - 3000:3000
+        depends_on: 
+            - webapi
+    webapi:
+        build: 
+            context: ./BackEnd/JobsityStocksChat
+            dockerfile: ./JobsityStocksChat.WebAPI/Dockerfile
+        ports: 
+            - 5000:80
+        depends_on: 
+            - rabbitmq
+            - mssqldb
+        restart: unless-stopped
+    stockbot:
+        build: 
+            context: ./BackEnd/JobsityStocksChat
+            dockerfile: ./JobsityStocksChat.StocksBot/Dockerfile
+        depends_on:
+            - webapi
+        restart: unless-stopped
+    mssqldb:
+        image: mcr.microsoft.com/mssql/server:2017-CU21-ubuntu-16.04
+        container_name: mssqldb
+        environment:
+          ACCEPT_EULA: Y
+          SA_PASSWORD: P455w0rd123456789
+          MSSQL_SA_PASSWORD: P455w0rd123456789
+        ports:
+          - 1433:1433
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: rabbitmq
+        ports:
+          - 5672:5672 
+          - 15672:15672

@@ -14,7 +14,7 @@ namespace JobsityStocksChat.StocksBot.MQ
         protected readonly IModel _channel;
         public StockPriceResponseQueueProducer()
         {
-            _factory = new ConnectionFactory() { HostName = "localhost" };
+            _factory = new ConnectionFactory() { HostName = "rabbitmq" };
             _connection = _factory.CreateConnection();
             _channel = _connection.CreateModel();
         }

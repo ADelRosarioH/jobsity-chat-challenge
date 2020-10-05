@@ -17,13 +17,13 @@ export class AuthService {
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
   logIn(userName: string, password: string) {
-    return this.http.post('http://localhost:5000/api/auth/login', {
+    return this.http.post('/api/auth/login', {
       userName, password
     });
   }
 
   register({ userName, email, password }) {
-    return this.http.post('http://localhost:5000/api/auth/register', {
+    return this.http.post('/api/auth/register', {
       userName, email, password
     });
   }

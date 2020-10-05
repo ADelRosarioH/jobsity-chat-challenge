@@ -17,7 +17,7 @@ namespace JobsityStocksChat.StocksBot
             consumer.Start();
 
             Console.WriteLine("Waiting for incoming messages...");
-            Console.ReadKey();
+            Console.ReadLine();
         }
     }
 }

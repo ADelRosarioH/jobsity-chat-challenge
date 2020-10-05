@@ -16,7 +16,7 @@ export class ChatService {
   }
 
   private buildConnection() {
-    this.chatHub = new HubConnectionBuilder().withUrl("http://localhost:5000/hubs/chat", {
+    this.chatHub = new HubConnectionBuilder().withUrl("/hubs/chat", {
       accessTokenFactory: () => this.authService.getToken()
     }).build();
   }
@@ -34,7 +34,7 @@ export class ChatService {
   }
 
   getLast50Messages() {
-    return this.http.get<ChatMessage[]>('http://localhost:5000/api/messages');
+    return this.http.get<ChatMessage[]>('/api/messages');
   }
 
 }

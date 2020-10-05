@@ -23,7 +23,7 @@ namespace JobsityStocksChat.StocksBot.MQ
             _producer = producer;
             _priceHandler = priceHandler;
 
-            _factory = new ConnectionFactory() { HostName = "localhost" };
+            _factory = new ConnectionFactory() { HostName = "rabbitmq" };
             _connection = _factory.CreateConnection();
             _channel = _connection.CreateModel();
         }

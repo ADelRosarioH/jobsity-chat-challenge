@@ -25,7 +25,7 @@ namespace JobsityStocksChat.WebAPI.MQ
         public StockPriceQueueConsumer(IHubContext<ChatHub> chatHub)
         {
             // Opens the connections to RabbitMQ
-            _factory = new ConnectionFactory() { HostName = "localhost" };
+            _factory = new ConnectionFactory() { HostName = "rabbitmq" };
             _connection = _factory.CreateConnection();
             _channel = _connection.CreateModel();
 

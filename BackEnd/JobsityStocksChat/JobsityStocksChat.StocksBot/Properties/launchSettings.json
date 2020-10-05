@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "JobsityStocksChat.StocksBot": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

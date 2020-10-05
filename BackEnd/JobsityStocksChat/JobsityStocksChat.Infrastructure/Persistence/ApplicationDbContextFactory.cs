@@ -12,7 +12,7 @@ namespace JobsityStocksChat.Infrastructure.Persistence
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseSqlServer("Server=localhost;Initial Catalog=JobsityStocksChatDB;Integrated Security=True");
+            optionsBuilder.UseSqlServer("Server=mssqldb,1433;Initial Catalog=JobsityStocksChatDB;User=SA;Password=P455w0rd123456789");
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }
