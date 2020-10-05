@@ -15,6 +15,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChatMessageRecieverComponent } from './chat-message-reciever/chat-message-reciever.component';
 import { ChatMessageSenderComponent } from './chat-message-sender/chat-message-sender.component';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ChatMessageSenderComponent } from './chat-message-sender/chat-message-s
       },
     }),
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MomentModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -6,6 +6,6 @@
                 {{message.message}}
             </p>
         </div>
-        <p class="small text-muted">{{message.createdAt}}</p>
+        <p class="small text-muted">{{message.createdAt | amUtc | amTimeAgo}}</p>
     </div>
 </div>
