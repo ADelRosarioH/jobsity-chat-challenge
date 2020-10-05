@@ -49,6 +49,7 @@ namespace JobsityStocksChat.StocksBot.MQ
                 var stockInfo = await _priceHandler.GetStockShareInfo(message);
 
                 var result = JsonConvert.SerializeObject(stockInfo);
+
                 _producer.SendStockInfo(stockInfo);
             };
 
