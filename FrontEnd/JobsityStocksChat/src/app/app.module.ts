@@ -16,6 +16,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChatMessageReceiverComponent } from './chat-message-receiver/chat-message-receiver.component';
 import { ChatMessageSenderComponent } from './chat-message-sender/chat-message-sender.component';
 import { MomentModule } from 'ngx-moment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { MomentModule } from 'ngx-moment';
     }),
     ReactiveFormsModule,
     FontAwesomeModule,
-    MomentModule
+    MomentModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
