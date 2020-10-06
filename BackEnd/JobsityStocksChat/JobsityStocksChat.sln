@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobsityStocksChat.Core", "J
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobsityStocksChat.Infrastructure", "JobsityStocksChat.Infrastructure\JobsityStocksChat.Infrastructure.csproj", "{FD513B9C-1269-47A4-8AAA-66BD08454614}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobsityStocksChat.StocksBot", "JobsityStocksChat.StocksBot\JobsityStocksChat.StocksBot.csproj", "{6707D3A4-E006-49ED-B1E2-0DECB7F775DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobsityStocksChat.StocksBot", "JobsityStocksChat.StocksBot\JobsityStocksChat.StocksBot.csproj", "{6707D3A4-E006-49ED-B1E2-0DECB7F775DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9B393422-8134-4967-95AE-6EDCB90D1614}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobsityStocksChat.UnitTests", "JobsityStocksChat.UnitTests\JobsityStocksChat.UnitTests.csproj", "{CBF0E8C6-05AB-4099-800B-5F8287F28451}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,16 @@ Global
 		{6707D3A4-E006-49ED-B1E2-0DECB7F775DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6707D3A4-E006-49ED-B1E2-0DECB7F775DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6707D3A4-E006-49ED-B1E2-0DECB7F775DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBF0E8C6-05AB-4099-800B-5F8287F28451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF0E8C6-05AB-4099-800B-5F8287F28451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF0E8C6-05AB-4099-800B-5F8287F28451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF0E8C6-05AB-4099-800B-5F8287F28451}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CBF0E8C6-05AB-4099-800B-5F8287F28451} = {9B393422-8134-4967-95AE-6EDCB90D1614}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97D29BD8-5DF8-47E4-9BE5-02FA70FEA7B6}
