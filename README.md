@@ -23,43 +23,47 @@ If you don't have a user account, go into the register page and create one. Afte
 
 Multi browser window sessions are supported. If you want to start a different session, create a new browser window (not browser tab) and login.
 
-### Others 
+### Management Tools 
 To connect to MSSQL Server 2017 using SQL Management Studio or other tool use the following connection parameters:
-- Server: localhost,1433
-- User: SA
-- Password: P455w0rd123456789
+- **Server**: localhost,1433
+- **User**: SA
+- **Password**: P455w0rd123456789
 
-To connect to RabbitMQ Management type http://localhost:15672/ in your browser with the following credentials:
-- Username: guest
-- Password: guest
+To connect to RabbitMQ Management go to http://localhost:15672/ in your browser and login with the following credentials:
+- **Username**: guest
+- **Password**: guest
 
+### Shutting down app
 You can shutdown all services at once executing `docker-compose down` in your terminal.
 
 ### Technologies used
 
 #### Back-End
-- .NET Core 3.1
+
+- **.NET Core 3.1**
     - Used to develop the StockBot Background Service that keeps consuming from the queue.
-- ASPNET Core 3.1
+- **ASP.NET Core 3.1**
     - Used to develop the Web API that handles authentication and chat features.
-- RabbitMQ
+- **RabbitMQ**
     - Handles the stock prices requests and responses.
-- MSSQL Server 2017
+- **MSSQL Server 2017**
     - Stores user accounts and messages.
-- NGINX
+- **NGINX**
     - Host Angular application and serves as http reverse proxy forwarding requests to the Web API.
-- Docker
+- **Docker**
     - Glue everything together.
 
 #### Front-End
-- HTML/CSS/JavaScript/TypeScript
-- Angular
+
+- **HTML/CSS/JavaScript/TypeScript**
+- **Angular**
     - Component based frontend application framework used to develop login, register and chat features.
 
 #### Libraries
+
 - Bootstrap 4
 - MomentJS
-- ASPNET Core SignalR
+- ASP.NET Core SignalR
 - RabbitMQ .NET Client
 - Entity Framework Core
 - TinyCsvParser
@@ -75,7 +79,6 @@ The consumer, in our case the StockBot is a .NET Core Console app, that implemen
 ### DevOps
 
 Docker provides the containerization and glue everything together, but isolates each individual service, thus preventing one service from breaking another. Docker builds our services and guarantees that it works the same every time.
-
 
 ### Requirements
 
@@ -102,6 +105,7 @@ messages.
     - After login and page is refreshed the chatroom displays the last 50 messages ordered by their timestamps.
 
 - [x] Unit test the functionality you prefer.
+    - Unit Tests were done using NUnit and Moq libraries and are located in the `BackEnd/JobsityStocksChat/JobsityStocksChat.UnitTests` project.
 
 ### Bonuses
 
@@ -113,3 +117,32 @@ messages.
 
 - [x] Build an installer.
     - Docker provides the docker-compose cli which I used to keep the application setup as easy as just installing docker, cloning the repository and running `docker-compose up`. A complete installer would do every step automatically I supposed but, this is close enough.
+
+### Development 
+
+#### Runtime and SDKs
+
+- Download and install Docker (https://docs.docker.com/get-docker/)
+- Download and install .NET Core 3.1 SDK (https://dotnet.microsoft.com/download)
+- Download and install NodeJS (https://nodejs.org/en/download/)
+
+#### Dependencies
+- Start MSSQL Server 2017 Docker container
+- Start RabbitMQ Docker container
+
+#### Front-End - WebApp
+- Open this repository folder in the terminal and change directory to `FrontEnd/JobsityStocksChat`
+- Install project dependencies by running `npm install` command
+- Start development server by running `ng serve` command
+
+#### Back-End - WebAPI
+- Open this repository folder in the terminal and change directory to `BackEnd/JobsityStocksChat/JobsityStocksChat.WebAPI`
+- Install project dependencies by running `dotnet restore "JobsityStocksChat.WebAPI.csproj"` command
+- Build project by running `dotnet build --output /app/build` command
+- Start project by running `dotnet /app/build/JobsityStocksChat.WebAPI.dll` command
+
+#### Back-End - StocksBot
+- Open this repository folder in the terminal and change directory to `BackEnd/JobsityStocksChat/JobsityStocksChat.StocksBot`
+- Install project dependencies by running `dotnet restore "JobsityStocksChat.StocksBot.csproj"` command
+- Build project by running `dotnet build --output /app/build` command
+- Start project by running `dotnet /app/build/JobsityStocksChat.StocksBot.dll` command
