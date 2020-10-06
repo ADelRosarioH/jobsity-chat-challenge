@@ -51,22 +51,14 @@ namespace JobsityStocksChat.WebAPI.MQ
                 if (stockShareInfo != null )
                 {
                     // send message to chat
-                    await _chatHub.Clients.All.SendAsync("RecieveMessage", new ChatMessageViewModel
-                    {
-                        UserName = "StockBot",
-                        Message = $"Stock: {stockShareInfo.Symbol} High: {stockShareInfo.High} Low: {stockShareInfo.Low}",
-                        CreatedAt = DateTime.Now
-                    });
+                    string response = $"{stockShareInfo.Symbol.ToUpper()} quote is {stockShareInfo.Close:F} per share";
+                    await AnswerRequest(response);
                 }
                 else
                 {
                     // send message to chat
-                    await _chatHub.Clients.All.SendAsync("RecieveMessage", new ChatMessageViewModel
-                    {
-                        UserName = "StockBot",
-                        Message = "I'm sorry, I couldn't find the stock your asked for.",
-                        CreatedAt = DateTime.Now
-                    });
+                    string response = "I'm sorry, I couldn't find the stock your asked for.";
+                    await AnswerRequest(response);
                 }
 
                 _channel.BasicAck(ea.DeliveryTag, false);
@@ -79,6 +71,16 @@ namespace JobsityStocksChat.WebAPI.MQ
 
             // Consume a RabbitMQ Queue
             _channel.BasicConsume(queue: "STOCK_PRICE_QUEUE_RESPONSE", autoAck: false, consumer: consumer);
+        }
+
+        private async Task AnswerRequest(string response)
+        {
+            await _chatHub.Clients.All.SendAsync("RecieveMessage", new ChatMessageViewModel
+            {
+                UserName = "StockBot",
+                Message = response,
+                CreatedAt = DateTime.Now
+            });
         }
 
         private void OnConsumerConsumerCancelled(object sender, ConsumerEventArgs e)
