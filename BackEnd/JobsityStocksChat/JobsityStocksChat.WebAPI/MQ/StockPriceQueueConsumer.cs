@@ -4,6 +4,7 @@ using JobsityStocksChat.Core.Interfaces;
 using JobsityStocksChat.WebAPI.Hubs;
 using JobsityStocksChat.WebAPI.Models;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -22,11 +23,15 @@ namespace JobsityStocksChat.WebAPI.MQ
         protected readonly IConnection _connection;
         protected readonly IModel _channel;
         protected readonly IHubContext<ChatHub> _chatHub;
+        protected readonly IConfiguration _configuration;
 
-        public StockPriceQueueConsumer(IHubContext<ChatHub> chatHub)
+        public StockPriceQueueConsumer(IConfiguration configuration, IHubContext<ChatHub> chatHub)
         {
+            _configuration = configuration;
+            string hostName = _configuration.GetConnectionString("StocksSharePriceQueueConnection");
+
             // Opens the connections to RabbitMQ
-            _factory = new ConnectionFactory() { HostName = "rabbitmq" };
+            _factory = new ConnectionFactory() { HostName = hostName };
             _connection = _factory.CreateConnection();
             _channel = _connection.CreateModel();
 
