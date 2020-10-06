@@ -16,6 +16,7 @@ namespace JobsityStocksChat.WebAPI.Hubs
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IChatCommandHandler _chatCommandHandler;
         private readonly IStockPriceQueueProducer _stockPriceQueueProducer;
+
         public ChatHub(IAsyncRepository<UserMessage> userMessageRepository,
             UserManager<ApplicationUser> userManager,
             IChatCommandHandler chatCommandHandler,
