@@ -23,6 +23,18 @@ If you don't have a user account, go into the register page and create one. Afte
 
 Multi browser window sessions are supported. If you want to start a different session, create a new browser window (not browser tab) and login.
 
+### Others 
+To connect to MSSQL Server 2017 using SQL Management Studio or other tool use the following connection parameters:
+- Server: localhost
+- User: SA
+- Password: P455w0rd123456789
+
+To connect to RabbitMQ Management type http://localhost:15672/ in your browser with the following credentials:
+- Username: guest
+- Password: guest
+
+You can shutdown all services at once executing `docker-compose down` in your terminal.
+
 ### Technologies used
 
 #### Back-End
