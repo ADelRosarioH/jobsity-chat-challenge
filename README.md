@@ -45,16 +45,16 @@ You can shutdown all services at once executing `docker-compose down` in your te
 
 #### Back-End
 
-- **.NET Core 3.1**
-- **ASP.NET Core 3.1**
-- **RabbitMQ**
-- **MSSQL Server 2017**
-- **NGINX**
-- **Docker**
+- .NET Core 3.1
+- ASP.NET Core 3.1
+- RabbitMQ
+- MSSQL Server 2017
+- NGINX
+- Docker
 
 #### Front-End
 
-- **Angular 10**
+- Angular 10
 
 #### Libraries
 
