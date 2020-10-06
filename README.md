@@ -76,6 +76,13 @@ Authentication and Message Query requests are handled by an ASPNET Core RESTful 
 
 The consumer, in our case the StockBot is a .NET Core Console app, that implements the RabbitMQ NET Client, which consumes from the command queue and processes the request and later producing a response and pushing it into a response queue, which our ASPNET Core API is consuming in the background. 
 
+### Web API Endpoints
+| HTTP Method 	| URI Path           	| Request Headers                                                  	| Request Body                              	| Description                                              	| Response Body                                            	|
+|-------------	|--------------------	|------------------------------------------------------------------	|-------------------------------------------	|----------------------------------------------------------	|----------------------------------------------------------	|
+| GET         	| /api/messages      	| Authorization Bearer {{ jwt }}<br>Content-Type: application/json 	|                                           	| Returns the last 50 messages ordered by timestamp        	| [{id: '', userName: '', message: '', createdAt: ''}]     	|
+| POST        	| /api/auth/register 	| Content-Type: application/json                                   	| { userName: '', email: '', password: '' } 	| Register a new user account                              	| [{ message: '', errors: [{ code: '', description: ''}]}] 	|
+| POST        	| /api/auth/login    	| Content-Type: application/json                                   	| { userName: '', password: '' }            	| Authenticate user credentials and return an access token 	| [{ message: '', errors: [{ code: '', description: ''}]]  	|
+
 ### DevOps
 
 Docker provides the containerization and glue everything together, but isolates each individual service, thus preventing one service from breaking another. Docker builds our services and guarantees that it works the same every time.
