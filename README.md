@@ -25,7 +25,7 @@ Multi browser window sessions are supported. If you want to start a different se
 
 ### Others 
 To connect to MSSQL Server 2017 using SQL Management Studio or other tool use the following connection parameters:
-- Server: localhost
+- Server: localhost,1433
 - User: SA
 - Password: P455w0rd123456789
 
