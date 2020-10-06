@@ -1,5 +1,6 @@
 ﻿using JobsityStocksChat.Core.Constants;
 using JobsityStocksChat.Core.Entities;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
@@ -13,9 +14,14 @@ namespace JobsityStocksChat.StocksBot.MQ
         protected readonly ConnectionFactory _factory;
         protected readonly IConnection _connection;
         protected readonly IModel _channel;
-        public StockPriceResponseQueueProducer()
+        protected readonly IConfiguration _configuration;
+
+        public StockPriceResponseQueueProducer(IConfiguration configuration)
         {
-            _factory = new ConnectionFactory() { HostName = "rabbitmq" };
+            _configuration = configuration;
+            string hostName = _configuration.GetConnectionString("StocksSharePriceQueueConnection");
+
+            _factory = new ConnectionFactory() { HostName = hostName };
             _connection = _factory.CreateConnection();
             _channel = _connection.CreateModel();
         }
