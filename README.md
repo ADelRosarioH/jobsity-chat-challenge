@@ -167,8 +167,13 @@ messages.
 - Download and install NodeJS (https://nodejs.org/en/download/)
 
 ### Dependencies
-- Start MSSQL Server 2017 Docker container
-- Start RabbitMQ Docker container
+- Start MSSQL Server 2017 docker container:
+	````
+	docker run -d --hostname mssqldb --name mssqldb -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P455w0rd123456789" -p 1433:1433 mcr.microsoft.com/mssql/server:2017-CU21-ubuntu-16.04`
+
+- Start RabbitMQ docker container:
+	````
+	docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management`
 
 ### Front-End - WebApp
 - Open this repository folder in the terminal and change directory to `FrontEnd/JobsityStocksChat`
