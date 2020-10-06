@@ -13,7 +13,7 @@ import { ChatComponent } from './chat/chat.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ChatMessageReceiverComponent } from './chat-message-Receiver/chat-message-Receiver.component';
+import { ChatMessageReceiverComponent } from './chat-message-receiver/chat-message-receiver.component';
 import { ChatMessageSenderComponent } from './chat-message-sender/chat-message-sender.component';
 import { MomentModule } from 'ngx-moment';
 
