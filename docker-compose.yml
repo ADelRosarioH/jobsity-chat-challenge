@@ -28,6 +28,8 @@ services:
         depends_on: 
             - rabbitmq
             - mssqldb
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Production
         restart: unless-stopped
     stockbot:
         build: 
@@ -35,6 +37,8 @@ services:
             dockerfile: ./JobsityStocksChat.StocksBot/Dockerfile
         depends_on:
             - webapi
+        environment:
+            - DOTNET_ENVIRONMENT=Production
         restart: unless-stopped
     mssqldb:
         image: mcr.microsoft.com/mssql/server:2017-CU21-ubuntu-16.04
@@ -42,7 +46,6 @@ services:
         environment:
           ACCEPT_EULA: Y
           SA_PASSWORD: P455w0rd123456789
-          MSSQL_SA_PASSWORD: P455w0rd123456789
         ports:
           - 1433:1433
     rabbitmq:
