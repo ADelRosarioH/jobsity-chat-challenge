@@ -46,7 +46,7 @@ export class ChatComponent implements OnInit {
   sendMessage() {
     const { message } = this.messageForm.value;
 
-    if (!message) return;
+    if (!message || !message.trim()) return;
 
     this.chatService.sendMessage({
       message,
