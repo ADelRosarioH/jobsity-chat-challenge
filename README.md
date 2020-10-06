@@ -102,10 +102,6 @@ WebSocket endpoints to handle real-time chat features using ASP.NET Core SignalR
 | /hubs/chat 	| SendMessage    	| { userName: '', message: '' }                	| access_token={{ jwt }}  	| Sends message to WebAPI server       	|
 | /hubs/chat 	| ReceiveMessage 	| { userName: '', message: '', createdAt: '' } 	| access_token={{ jwt }}  	| Receives messages from WebAPI server 	|
 
-### DevOps
-
-Docker provides the containerization and glue everything together, but isolates each individual service, thus preventing one service from breaking another. Docker builds our services and guarantees that it works the same every time.
-
 ### Requirements
 
 - [x] Allow registered users to log in and talk with other users in a chatroom.
