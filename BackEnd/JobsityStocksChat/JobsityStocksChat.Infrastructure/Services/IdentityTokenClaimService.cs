@@ -1,4 +1,5 @@
-﻿using JobsityStocksChat.Core.Interfaces;
+﻿using JobsityStocksChat.Core.Constants;
+using JobsityStocksChat.Core.Interfaces;
 using JobsityStocksChat.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -16,7 +17,7 @@ namespace JobsityStocksChat.Infrastructure.Services
         public string GetToken(string userName)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("JWT_SECRET_KEY_A7D3318FC11874C4F8B4682A899BB");
+            var key = Encoding.ASCII.GetBytes(AuthConstants.AUTH_KEY);
 
             var claims = new List<Claim> { new Claim(ClaimTypes.Name, userName) };
 
