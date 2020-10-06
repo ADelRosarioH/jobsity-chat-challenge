@@ -22,9 +22,9 @@ Email: adelrosarioh@gmail.com
 7. [Development](#development)
 	* [Runtime and SDKs](#runtime-and-sdks)
 	* [Dependencies](#dependencies)
-	* [Front-End - WebApp](#front-end-webapp)
-	* [Back-End - WebAPI](#back-end-webapi)
-	* [Back-End - StocksBot](#back-end-stocksbot)
+	* [Front-End - WebApp](#front-end---webapp)
+	* [Back-End - WebAPI](#back-end---webapi)
+	* [Back-End - StocksBot](#back-end---stocksbot)
 
 # Installation instructions
 
