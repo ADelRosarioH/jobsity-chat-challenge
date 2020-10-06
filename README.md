@@ -177,17 +177,31 @@ messages.
 
 ### Front-End - WebApp
 - Open this repository folder in the terminal and change directory to `FrontEnd/JobsityStocksChat`
-- Install project dependencies by running `npm install` command
-- Start development server by running `ng serve` command
+- Install project dependencies by running command:
+	````
+	npm install
+- Start development server by running command:
+	````
+	ng serve
+- Go to http://localhost:4200/
 
 ### Back-End - WebAPI
 - Open this repository folder in the terminal and change directory to `BackEnd/JobsityStocksChat/JobsityStocksChat.WebAPI`
-- Install project dependencies by running `dotnet restore "JobsityStocksChat.WebAPI.csproj"` command
-- Build project by running `dotnet build --output /app/build` command
-- Start project by running `dotnet /app/build/JobsityStocksChat.WebAPI.dll` command
+- Install project dependencies by running command:
+	````
+	dotnet restore "JobsityStocksChat.WebAPI.csproj"
+
+- Start project by running command:
+	````
+	dotnet run --launch-profile "JobsityStocksChat.WebAPI"
+- Web API server is running on http://localhost:5000
 
 ### Back-End - StocksBot
 - Open this repository folder in the terminal and change directory to `BackEnd/JobsityStocksChat/JobsityStocksChat.StocksBot`
-- Install project dependencies by running `dotnet restore "JobsityStocksChat.StocksBot.csproj"` command
-- Build project by running `dotnet build --output /app/build` command
-- Start project by running `dotnet /app/build/JobsityStocksChat.StocksBot.dll` command
+- Install project dependencies by running command:
+	````
+	dotnet restore "JobsityStocksChat.StocksBot.csproj"
+
+- Start project by running command:
+	````
+	dotnet run --launch-profile "JobsityStocksChat.StocksBot"
