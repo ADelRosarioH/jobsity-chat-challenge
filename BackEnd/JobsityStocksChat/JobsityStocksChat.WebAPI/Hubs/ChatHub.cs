@@ -48,7 +48,7 @@ namespace JobsityStocksChat.WebAPI.Hubs
                 });
             }
 
-            await Clients.All.SendAsync("RecieveMessage", message);
+            await Clients.All.SendAsync("ReceiveMessage", message);
         }
 
         private async Task SaveMessageToDatabase(ChatMessageViewModel message)

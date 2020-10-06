@@ -75,7 +75,7 @@ namespace JobsityStocksChat.WebAPI.MQ
 
         private async Task AnswerRequest(string response)
         {
-            await _chatHub.Clients.All.SendAsync("RecieveMessage", new ChatMessageViewModel
+            await _chatHub.Clients.All.SendAsync("ReceiveMessage", new ChatMessageViewModel
             {
                 UserName = "StockBot",
                 Message = response,

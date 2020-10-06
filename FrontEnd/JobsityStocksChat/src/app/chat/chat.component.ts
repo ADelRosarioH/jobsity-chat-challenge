@@ -38,7 +38,7 @@ export class ChatComponent implements OnInit {
       console.error(err);
     });
 
-    this.chatService.setupRecieveMessageHook((data) => this.recievedMessage(data));
+    this.chatService.setupReceiveMessageHook((data) => this.ReceivedMessage(data));
 
     this.getLast50Messages();
   }
@@ -56,7 +56,7 @@ export class ChatComponent implements OnInit {
     this.messageForm.setValue({ message: '' });
   }
 
-  recievedMessage(message: ChatMessage) {
+  ReceivedMessage(message: ChatMessage) {
     this.messages.push(message);
   }
 

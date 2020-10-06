@@ -29,8 +29,8 @@ export class ChatService {
     this.chatHub.invoke("SendMessage", message);
   }
 
-  setupRecieveMessageHook(callback: (...args: any[]) => void) {
-    this.chatHub.on('RecieveMessage', callback);
+  setupReceiveMessageHook(callback: (...args: any[]) => void) {
+    this.chatHub.on('ReceiveMessage', callback);
   }
 
   getLast50Messages() {

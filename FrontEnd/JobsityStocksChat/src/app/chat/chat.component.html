@@ -20,8 +20,8 @@
                                     <app-chat-message-sender *ngIf="message.userName != currentUser.userName"
                                         [message]="message"></app-chat-message-sender>
 
-                                    <app-chat-message-reciever *ngIf="message.userName == currentUser.userName"
-                                        [message]="message"></app-chat-message-reciever>
+                                    <app-chat-message-Receiver *ngIf="message.userName == currentUser.userName"
+                                        [message]="message"></app-chat-message-Receiver>
                                 </div>
                             </div>
 

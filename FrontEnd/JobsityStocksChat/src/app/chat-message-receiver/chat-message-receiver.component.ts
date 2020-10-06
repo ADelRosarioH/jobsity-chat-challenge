@@ -2,11 +2,11 @@ import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { ChatMessage } from '../services/chat.service';
 
 @Component({
-  selector: 'app-chat-message-reciever',
-  templateUrl: './chat-message-reciever.component.html',
-  styleUrls: ['./chat-message-reciever.component.css']
+  selector: 'app-chat-message-Receiver',
+  templateUrl: './chat-message-Receiver.component.html',
+  styleUrls: ['./chat-message-Receiver.component.css']
 })
-export class ChatMessageRecieverComponent implements OnInit, AfterViewInit {
+export class ChatMessageReceiverComponent implements OnInit, AfterViewInit {
   @Input()
   public message: ChatMessage;
   container: HTMLElement;
