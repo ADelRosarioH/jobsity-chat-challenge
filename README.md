@@ -15,8 +15,9 @@ Email: adelrosarioh@gmail.com
 	* [Front-End](#front-end)
 	* [Libraries](#libraries)
 4. [Project Architecture](#project-architecture)
-	* [Web API - RESTful Endpoints](###web-api-restful-endpoints)
-	* [Web API - WebSockets Endpoints](###web-api-websockets-endpoints)
+	* [Overview](#overview)
+	* [Web API - RESTful Endpoints](#web-api---restful-endpoints)
+	* [Web API - WebSockets Endpoints](#web-api---websockets-endpoints)
 5. [Requirements](#requirements)
 6. [Requirements](#bonuses)
 7. [Development](#development)
@@ -102,6 +103,9 @@ The WebAPI has RESTful endpoints for account authentication, account registratio
 WebSocket endpoints to handle real-time chat features using ASP.NET Core SignalR.
 
 The FrontEnd web application is dockerized and served by NGINX which is also used as a reverse proxy, forwarding requests to the Web API.
+
+### Overview
+![Image of Yaktocat](/chat_challenge_architecture_diagram_overview.png)
 
 ### Web API - RESTful Endpoints
 | HTTP Method 	| URI Path           	| Request Headers                                                  	| Request Body                              	| Description                                              	| Response Body                                            	|
