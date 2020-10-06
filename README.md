@@ -75,11 +75,19 @@ You can shutdown all services at once executing `docker-compose down` in your te
 
 ### Project Architecture
 
-The project was built following  some of the conventions of Onion Architecture. Separating the core functionalities, entities, interfaces of the domain outside of any client. Also have the infrastructure functionalities that are in charge of implementing the core interfaces, services and data handling. Finally the clients, as our web api which depends on the infrastructure implementation. 
+The project is separated in three application binaries. The FrontEnd web application developed using the Angular Framework,
+The BackEnd ASP.NET Core RESTful API Web API and a .NET Core Console application.
 
-Authentication and Message Query requests are handled by an ASPNET Core RESTful API. The chatroom messages are handled by the same service but using a WebSocket connection, provided by ASPNET Core SignalR. If the message handler identifies a command, it's sent to a specific queue of RabbitMQ for asynchronous processing of the consumer. 
+The BackEnd solution structure is divided into the following projects:
+- **Core**: defines business entities and interfaces.
+- **Infrastructure**: implements service interfaces and handles data storage and message queuing.
+- **ASP.NET Core WebAPI**: fullfil frontend requests like, login, register and chat, also keeps listening for incomming stock share price responses from the queue.
+- **StockBot Console app**: keeps listening for incomming stock share price requests from queue, requests stock share price from http://stooq.com and 
+pushes a message into the stock share price response queue with the parsed data.
 
-The consumer, in our case the StockBot is a .NET Core Console app, that implements the RabbitMQ NET Client, which consumes from the command queue and processes the request and later producing a response and pushing it into a response queue, which our ASPNET Core API is consuming in the background. 
+The WebAPI has RESTful endpoints for account authentication, account registration and getting the last messages and implements 
+WebSocket endpoints to handle real-time chat features using ASP.NET Core SignalR.
+
 
 #### Web API RESTful Endpoints
 | HTTP Method 	| URI Path           	| Request Headers                                                  	| Request Body                              	| Description                                              	| Response Body                                            	|
