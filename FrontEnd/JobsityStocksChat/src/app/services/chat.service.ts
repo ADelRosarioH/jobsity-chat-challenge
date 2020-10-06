@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ChatService {
   }
 
   private buildConnection() {
-    this.chatHub = new HubConnectionBuilder().withUrl("/hubs/chat", {
+    this.chatHub = new HubConnectionBuilder().withUrl(`${environment.apiUrl}/hubs/chat`, {
       accessTokenFactory: () => this.authService.getToken()
     }).build();
   }
@@ -34,7 +35,7 @@ export class ChatService {
   }
 
   getLast50Messages() {
-    return this.http.get<ChatMessage[]>('/api/messages');
+    return this.http.get<ChatMessage[]>(`${environment.apiUrl}/api/messages`);
   }
 
 }

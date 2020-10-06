@@ -8,6 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CanActivate, Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,13 @@ export class AuthService {
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
   logIn(userName: string, password: string) {
-    return this.http.post('/api/auth/login', {
+    return this.http.post(`${environment.apiUrl}/api/auth/login`, {
       userName, password
     });
   }
 
   register({ userName, email, password }) {
-    return this.http.post('/api/auth/register', {
+    return this.http.post(`${environment.apiUrl}/api/auth/register`, {
       userName, email, password
     });
   }
