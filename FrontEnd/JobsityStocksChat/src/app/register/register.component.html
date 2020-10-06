@@ -37,13 +37,30 @@
                                             <div class="col-sm-6">
                                                 <input type="password" class="form-control form-control-user"
                                                     id="exampleRepeatPassword" placeholder="Repeat Password"
-                                                    formControlName="passwordRepeat">
+                                                    formControlName="passwordRepeat"
+                                                    [class.is-invalid]="!doesPasswordsMatch">
+                                            </div>
+                                            <div class="col-sm-12 p-2">
+                                                <small class="text-muted text-small">
+                                                    Passwords must be at least 6 characters,
+                                                    must have at least one non alphanumeric character,
+                                                    must have at least one lowercase ('a'-'z') and
+                                                    must have at least one uppercase ('A'-'Z')
+                                                </small>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block"
+                                            [disabled]="!registerForm.valid">
                                             Register Account
                                         </button>
                                     </form>
+                                    <div *ngIf="errors && errors.length">
+                                        <ul>
+                                            <li *ngFor="let errorDescription of errors" class="text-danger">
+                                                {{ errorDescription }}
+                                            </li>
+                                        </ul>
+                                    </div>
                                     <hr>
                                     <!-- <div class="text-center">
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>

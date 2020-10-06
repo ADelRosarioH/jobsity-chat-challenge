@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -10,11 +11,11 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
-    userName: new FormControl(''),
-    password: new FormControl(''),
+    userName: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
@@ -27,6 +28,8 @@ export class LoginComponent implements OnInit {
     this.authService.logIn(userName, password).subscribe((data: LoginResponse) => {
       localStorage.setItem("token", data.token);
       this.router.navigate([""]);
+    }, (err) => {
+      this.toastr.error(err.error.message, "Oops!");
     });
   }
 
