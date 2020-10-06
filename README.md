@@ -17,11 +17,16 @@ The installation process should take about 15 minutes depending on your internet
 
 ### How to Use
 
-After building and running our containers, you can access the chat app in the following address http://localhost:8081 using any internet browser compatible with Angular ([Angular's browser support](https://angular.io/guide/browser-support)). 
+Click [here](http://localhost:8081) to go into the webapp. You can register a new account in [here](http://localhost:8081/register)
+or login [here](http://localhost:8081/login) if you already have one.
 
-If you don't have a user account, go into the register page and create one. After that you should login with your newly created or existing user account and start chatting!.
+You can have multiple user sessions login in from a different browser window (not browser tab).
 
-Multi browser window sessions are supported. If you want to start a different session, create a new browser window (not browser tab) and login.
+Make sure you are using one of the following supported browsers:
+- Chrome 	latest
+- Firefox 	latest and extended support release (ESR) 
+- Edge 	2 most recent major versions
+- IE 	11
 
 ### Management Tools 
 To connect to MSSQL Server 2017 using SQL Management Studio or other tool use the following connection parameters:
