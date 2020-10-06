@@ -46,23 +46,15 @@ You can shutdown all services at once executing `docker-compose down` in your te
 #### Back-End
 
 - **.NET Core 3.1**
-    - Used to develop the StockBot Background Service that keeps consuming from the queue.
 - **ASP.NET Core 3.1**
-    - Used to develop the Web API that handles authentication and chat features.
 - **RabbitMQ**
-    - Handles the stock prices requests and responses.
 - **MSSQL Server 2017**
-    - Stores user accounts and messages.
 - **NGINX**
-    - Host Angular application and serves as http reverse proxy forwarding requests to the Web API.
 - **Docker**
-    - Glue everything together.
 
 #### Front-End
 
-- **HTML/CSS/JavaScript/TypeScript**
-- **Angular**
-    - Component based frontend application framework used to develop login, register and chat features.
+- **Angular 10**
 
 #### Libraries
 
@@ -88,6 +80,7 @@ pushes a message into the stock share price response queue with the parsed data.
 The WebAPI has RESTful endpoints for account authentication, account registration and getting the last messages and implements 
 WebSocket endpoints to handle real-time chat features using ASP.NET Core SignalR.
 
+The FrontEnd web application is dockerized and served by NGINX which is also used as a reverse proxy, forwarding requests to the Web API.
 
 #### Web API RESTful Endpoints
 | HTTP Method 	| URI Path           	| Request Headers                                                  	| Request Body                              	| Description                                              	| Response Body                                            	|
@@ -127,7 +120,7 @@ messages.
     - After login and page is refreshed the chatroom displays the last 50 messages ordered by their timestamps.
 
 - [x] Unit test the functionality you prefer.
-    - Unit Tests were done using NUnit and Moq libraries and are located in the `BackEnd/JobsityStocksChat/JobsityStocksChat.UnitTests` project.
+    - Unit Tests were done using NUnit and Moq. Tests are located in the `BackEnd/JobsityStocksChat/JobsityStocksChat.UnitTests` project.
 
 ### Bonuses
 
@@ -135,10 +128,10 @@ messages.
     - User register and login provided by .NET Core Identity.
 
 - [x] Handle messages that are not understood or any exceptions raised within the bot.
-    - If bot didn't find a stock by their code it would say "I'm sorry, I couldn't find the stock your asked for.".
+    - If the bot didn't find a stock by its stock code it would say "I'm sorry, I couldn't find the stock your asked for.".
 
 - [x] Build an installer.
-    - Docker provides the docker-compose cli which I used to keep the application setup as easy as just installing docker, cloning the repository and running `docker-compose up`. A complete installer would do every step automatically I supposed but, this is close enough.
+    - The use `docker-compose` keeps the application setup simple and as closed to deploying the application to a production enviroment as possible.
 
 ### Development 
 
