@@ -1,4 +1,5 @@
-﻿using JobsityStocksChat.Core.Entities;
+﻿using JobsityStocksChat.Core.Constants;
+using JobsityStocksChat.Core.Entities;
 using JobsityStocksChat.Core.Interfaces;
 using JobsityStocksChat.WebAPI.Hubs;
 using JobsityStocksChat.WebAPI.Models;
@@ -29,7 +30,7 @@ namespace JobsityStocksChat.WebAPI.MQ
             _connection = _factory.CreateConnection();
             _channel = _connection.CreateModel();
 
-            _channel.QueueDeclare(queue: "STOCK_PRICE_QUEUE_RESPONSE",
+            _channel.QueueDeclare(queue: MQConstants.STOCK_PRICE_QUEUE_RESPONSE,
                 durable: false,
                 exclusive: false,
                 autoDelete: false);
@@ -70,14 +71,14 @@ namespace JobsityStocksChat.WebAPI.MQ
             consumer.ConsumerCancelled += OnConsumerConsumerCancelled;
 
             // Consume a RabbitMQ Queue
-            _channel.BasicConsume(queue: "STOCK_PRICE_QUEUE_RESPONSE", autoAck: false, consumer: consumer);
+            _channel.BasicConsume(queue: MQConstants.STOCK_PRICE_QUEUE_RESPONSE, autoAck: false, consumer: consumer);
         }
 
         private async Task AnswerRequest(string response)
         {
-            await _chatHub.Clients.All.SendAsync("ReceiveMessage", new ChatMessageViewModel
+            await _chatHub.Clients.All.SendAsync(ChatHubConstants.CLIENT_METHOD_NAME, new ChatMessageViewModel
             {
-                UserName = "StockBot",
+                UserName = ChatHubConstants.BOT_NAME,
                 Message = response,
                 CreatedAt = DateTime.Now
             });

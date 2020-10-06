@@ -1,4 +1,5 @@
-﻿using JobsityStocksChat.Core.Entities;
+﻿using JobsityStocksChat.Core.Constants;
+using JobsityStocksChat.Core.Entities;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
@@ -21,7 +22,7 @@ namespace JobsityStocksChat.StocksBot.MQ
 
         public void SendStockInfo(StockShareInfo stockShareInfo)
         {
-            _channel.QueueDeclare(queue: "STOCK_PRICE_QUEUE_RESPONSE",
+            _channel.QueueDeclare(queue: MQConstants.STOCK_PRICE_QUEUE_RESPONSE,
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
@@ -32,7 +33,7 @@ namespace JobsityStocksChat.StocksBot.MQ
             var body = Encoding.UTF8.GetBytes(stockString);
 
             _channel.BasicPublish(exchange: "",
-                                 routingKey: "STOCK_PRICE_QUEUE_RESPONSE",
+                                 routingKey: MQConstants.STOCK_PRICE_QUEUE_RESPONSE,
                                  basicProperties: null,
                                  body: body);
 

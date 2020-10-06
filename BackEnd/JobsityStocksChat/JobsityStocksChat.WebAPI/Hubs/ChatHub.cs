@@ -1,4 +1,5 @@
-﻿using JobsityStocksChat.Core.Entities;
+﻿using JobsityStocksChat.Core.Constants;
+using JobsityStocksChat.Core.Entities;
 using JobsityStocksChat.Core.Interfaces;
 using JobsityStocksChat.WebAPI.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -48,7 +49,7 @@ namespace JobsityStocksChat.WebAPI.Hubs
                 });
             }
 
-            await Clients.All.SendAsync("ReceiveMessage", message);
+            await Clients.All.SendAsync(ChatHubConstants.CLIENT_METHOD_NAME, message);
         }
 
         private async Task SaveMessageToDatabase(ChatMessageViewModel message)

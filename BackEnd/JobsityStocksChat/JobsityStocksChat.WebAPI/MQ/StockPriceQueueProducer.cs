@@ -1,4 +1,5 @@
-﻿using JobsityStocksChat.Core.Interfaces;
+﻿using JobsityStocksChat.Core.Constants;
+using JobsityStocksChat.Core.Interfaces;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace JobsityStocksChat.WebAPI.MQ
 
         public void RequestStockPrice(string stockCode)
         {
-            _channel.QueueDeclare(queue: "STOCK_PRICE_QUEUE_REQUEST",
+            _channel.QueueDeclare(queue: MQConstants.STOCK_PRICE_QUEUE_REQUEST,
                                      durable: false,
                                      exclusive: false,
                                      autoDelete: false,
@@ -32,7 +33,7 @@ namespace JobsityStocksChat.WebAPI.MQ
 
             var messageBody = Encoding.UTF8.GetBytes(stockCode);
 
-            _channel.BasicPublish(exchange: "", routingKey: "STOCK_PRICE_QUEUE_REQUEST", body: messageBody, basicProperties: null);
+            _channel.BasicPublish(exchange: "", routingKey: MQConstants.STOCK_PRICE_QUEUE_REQUEST, body: messageBody, basicProperties: null);
         }
     }
 }

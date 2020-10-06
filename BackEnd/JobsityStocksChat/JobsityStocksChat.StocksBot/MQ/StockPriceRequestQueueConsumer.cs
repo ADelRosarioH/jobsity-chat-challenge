@@ -1,4 +1,5 @@
-﻿using JobsityStocksChat.Core.Entities;
+﻿using JobsityStocksChat.Core.Constants;
+using JobsityStocksChat.Core.Entities;
 using JobsityStocksChat.Core.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -31,7 +32,7 @@ namespace JobsityStocksChat.StocksBot.MQ
         public void Start()
         {
 
-            _channel.QueueDeclare(queue: "STOCK_PRICE_QUEUE_REQUEST",
+            _channel.QueueDeclare(queue: MQConstants.STOCK_PRICE_QUEUE_REQUEST,
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
@@ -53,7 +54,7 @@ namespace JobsityStocksChat.StocksBot.MQ
                 _producer.SendStockInfo(stockInfo);
             };
 
-            _channel.BasicConsume(queue: "STOCK_PRICE_QUEUE_REQUEST",
+            _channel.BasicConsume(queue: MQConstants.STOCK_PRICE_QUEUE_REQUEST,
                                  autoAck: true,
                                  consumer: consumer);
 

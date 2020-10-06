@@ -1,5 +1,6 @@
 using System.Text;
 using System.Threading.Tasks;
+using JobsityStocksChat.Core.Constants;
 using JobsityStocksChat.Core.Entities;
 using JobsityStocksChat.Core.Interfaces;
 using JobsityStocksChat.Infrastructure.Persistence;
@@ -37,7 +38,8 @@ namespace JobsityStocksChat.WebAPI
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
-            var key = Encoding.ASCII.GetBytes("JWT_SECRET_KEY_A7D3318FC11874C4F8B4682A899BB");
+            var key = Encoding.ASCII.GetBytes(AuthConstants.AUTH_KEY);
+
             services.AddAuthentication(config =>
             {
                 config.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
