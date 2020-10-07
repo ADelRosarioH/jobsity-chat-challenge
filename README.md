@@ -170,19 +170,25 @@ messages.
 - Start MSSQL Server 2017 docker container:
 	````
 	docker run -d --hostname mssqldb --name mssqldb_dev -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P455w0rd123456789" -p 1433:1433 mcr.microsoft.com/mssql/server:2017-CU21-ubuntu-16.04`
+	````
 
 - Start RabbitMQ docker container:
 	````
 	docker run -d --hostname rabbitmq --name rabbitmq_dev -p 5672:5672 -p 15672:15672 rabbitmq:3-management`
+	````
 
 ### Front-End - WebApp
 - Open this repository folder in the terminal and change directory to `FrontEnd/JobsityStocksChat`
 - Install project dependencies by running command:
 	````
 	npm install
+	````
+
 - Start development server by running command:
 	````
 	ng serve
+	````
+
 - Go to http://localhost:4200/
 
 ### Back-End - WebAPI
@@ -190,10 +196,12 @@ messages.
 - Install project dependencies by running command:
 	````
 	dotnet restore "JobsityStocksChat.WebAPI.csproj"
+	````
 
 - Start project by running command:
 	````
 	dotnet run --launch-profile "JobsityStocksChat.WebAPI"
+	````
 - Web API server is running on http://localhost:5000
 
 ### Back-End - StocksBot
@@ -201,7 +209,9 @@ messages.
 - Install project dependencies by running command:
 	````
 	dotnet restore "JobsityStocksChat.StocksBot.csproj"
+	````
 
 - Start project by running command:
 	````
 	dotnet run --launch-profile "JobsityStocksChat.StocksBot"
+	````
