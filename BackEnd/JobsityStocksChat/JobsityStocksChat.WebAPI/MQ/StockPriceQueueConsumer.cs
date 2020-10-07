@@ -63,7 +63,7 @@ namespace JobsityStocksChat.WebAPI.MQ
                 else
                 {
                     // send message to chat
-                    string response = "I'm sorry, I couldn't find the stock your asked for.";
+                    string response = "I'm sorry, I couldn't find the stock you asked for.";
                     await AnswerRequest(response);
                 }
 

@@ -95,8 +95,8 @@ The BackEnd ASP.NET Core RESTful API Web API and a .NET Core Console application
 The BackEnd solution structure is divided into the following projects:
 - **Core**: defines business entities and interfaces.
 - **Infrastructure**: implements service interfaces and handles data storage and message queuing.
-- **ASP.NET Core WebAPI**: fullfil frontend requests like, login, register and chat, also keeps listening for incomming stock share price responses from the queue.
-- **StockBot Console app**: keeps listening for incomming stock share price requests from queue, requests stock share price from http://stooq.com and 
+- **ASP.NET Core WebAPI**: fulfil frontend requests like, login, register and chat, also keeps listening for incoming stock share price responses from the queue.
+- **StockBot Console app**: keeps listening for incoming stock share price requests from queue, requests stock share price from http://stooq.com and 
 pushes a message into the stock share price response queue with the parsed data.
 
 The WebAPI has RESTful endpoints for account authentication, account registration and getting the last messages and implements 
@@ -123,11 +123,11 @@ The FrontEnd web application is dockerized and served by NGINX which is also use
 # Requirements
 
 - [x] Allow registered users to log in and talk with other users in a chatroom.
-    - Users can register a new account and logging in into the chatroom.
+    - Users can register a new account and log in into the chatroom.
 
 - [x] Allow users to post messages as commands into the chatroom with the following format
 /stock=stock_code
-    - the /stock command is handled asynchronously, if the app don't understand the command a message is displayed.
+    - the /stock command is handled asynchronously, if the app doesn't understand the command a message is displayed.
 
 - [x] Create a decoupled bot that will call an API using the stock_code as a parameter
 (https://stooq.com/q/l/?s=aapl.us&f=sd2t2ohlcv&h&e=csv, here aapl.us is the
@@ -153,10 +153,10 @@ messages.
     - User register and login provided by .NET Core Identity.
 
 - [x] Handle messages that are not understood or any exceptions raised within the bot.
-    - If the bot didn't find a stock by its stock code it would say "I'm sorry, I couldn't find the stock your asked for.".
+    - If the bot didn't find a stock by its stock code it would say "I'm sorry, I couldn't find the stock you asked for.".
 
 - [x] Build an installer.
-    - The use `docker-compose` keeps the application setup simple and as closed to deploying the application to a production enviroment as possible.
+    - The use of 'docker-compose` keeps the application setup simple and as closed to deploying the application to a production environment as possible.
 
 # Development 
 
