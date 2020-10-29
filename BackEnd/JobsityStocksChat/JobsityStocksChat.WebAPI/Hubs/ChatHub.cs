@@ -31,8 +31,6 @@ namespace JobsityStocksChat.WebAPI.Hubs
 
         public async Task SendMessage(ChatMessageViewModel message)
         {
-            message.CreatedAt = DateTime.Now;
-
             if (!_chatCommandHandler.IsCommand(message.Message))
             {
                 await SaveMessageToDatabase(message);
