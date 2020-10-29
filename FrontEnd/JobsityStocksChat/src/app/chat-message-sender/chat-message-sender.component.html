@@ -9,6 +9,8 @@
                 {{message.message}}
             </p>
         </div>
-        <p class="small text-muted">{{message.createdAt | amUtc | amTimeAgo}}</p>
+        <p class="small text-muted">
+            {{message.createdAt | amDateFormat:'MM/DD/YYYY hh:mm:ss a' | amTimeAgo}}
+        </p>
     </div>
 </div>

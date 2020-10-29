@@ -30,7 +30,7 @@ namespace JobsityStocksChat.WebAPI.Controllers
             var result = messages.Select(t => new ChatMessageViewModel { 
                Id = t.Id,
                Message = t.Message,
-               CreatedAt = t.CreatedAt,
+               CreatedAt = t.CreatedAt.ToString(),
                UserName = t.User.UserName
             });
 

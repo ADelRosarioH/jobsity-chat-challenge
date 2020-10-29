@@ -58,7 +58,7 @@ namespace JobsityStocksChat.WebAPI.Hubs
             {
                 Message = message.Message,
                 UserId = user.Id,
-                CreatedAt = message.CreatedAt
+                CreatedAt = DateTime.Parse(message.CreatedAt)
             });
         }
     }

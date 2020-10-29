@@ -55,6 +55,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.chatService.sendMessage({
       message,
       userName: this.currentUser.userName,
+      createdAt: new Date().toUTCString()
     });
 
     this.messageForm.setValue({ message: '' });

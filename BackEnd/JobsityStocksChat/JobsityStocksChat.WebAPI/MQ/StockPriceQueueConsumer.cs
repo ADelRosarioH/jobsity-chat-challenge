@@ -85,7 +85,7 @@ namespace JobsityStocksChat.WebAPI.MQ
             {
                 UserName = ChatHubConstants.BOT_NAME,
                 Message = response,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now.ToString()
             });
         }
 
