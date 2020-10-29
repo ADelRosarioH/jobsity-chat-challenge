@@ -60,7 +60,7 @@ namespace JobsityStocksChat.WebAPI
                 // Sending the access token in the query string is required due to
                 // a limitation in Browser APIs. We restrict it to only calls to the
                 // SignalR hub in this code.
-               
+
                 config.Events = new JwtBearerEvents
                 {
                     OnMessageReceived = context =>
@@ -93,6 +93,15 @@ namespace JobsityStocksChat.WebAPI
                         .AllowAnyHeader());
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("DevEnvCorsPolicy",
+                    builder => builder.WithOrigins("http://localhost:4200")
+                        .AllowCredentials()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
+
             services.AddSignalR();
 
             services.AddScoped<ITokenClaimService, IdentityTokenClaimService>();
@@ -108,11 +117,15 @@ namespace JobsityStocksChat.WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
         {
-            app.UseCors("CorsPolicy");
 
             if (env.IsDevelopment())
             {
+                app.UseCors("DevEnvCorsPolicy");
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseCors("CorsPolicy");
             }
 
             app.UseRouting();
