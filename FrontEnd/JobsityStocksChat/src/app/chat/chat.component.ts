@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +10,7 @@ import { ChatMessage, ChatService } from '../services/chat.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
 
   currentUser: User;
 
@@ -44,6 +44,10 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage() {
+
+    if (!this.chatService.isConnected())
+      this.chatService.reconnect();
+
     const { message } = this.messageForm.value;
 
     if (!message || !message.trim()) return;
@@ -67,7 +71,13 @@ export class ChatComponent implements OnInit {
   }
 
   doLogout() {
+    this.chatService.stopConnection();
     this.authService.logOut();
     this.router.navigate(['login']);
   }
+
+  ngOnDestroy(): void {
+    this.chatService.stopConnection();
+  }
+
 }

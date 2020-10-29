@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@aspnet/signalr';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
 
@@ -23,6 +23,9 @@ export class ChatService {
   }
 
   startConnection() {
+    if (!this.chatHub) {
+      this.buildConnection();
+    }
     return this.chatHub.start();
   }
 
@@ -38,6 +41,22 @@ export class ChatService {
     return this.http.get<ChatMessage[]>(`${environment.apiUrl}/api/messages`);
   }
 
+  isConnected() {
+    return this.chatHub.state == HubConnectionState.Connected;
+  }
+
+  reconnect() {
+    if (!this.isConnected()) {
+      this.startConnection();
+    }
+  }
+
+  stopConnection() {
+    if (this.chatHub) {
+      this.chatHub.stop();
+      this.chatHub = null;
+    }
+  }
 }
 
 
